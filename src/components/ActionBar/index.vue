@@ -1,5 +1,6 @@
 <template>
-  <mu-container v-if="selectedObj" class="button-wrapper">
+  <!-- 只在canvas上有Obj时显示actionBar. -->
+  <mu-container v-if="selectedObj" class="button-wrapper">   
     <div>
       <mu-button fab small color="primary" @click="rotateObject">
         <mu-icon value="rotate_90_degrees_ccw"></mu-icon>
@@ -54,8 +55,10 @@
       ]),
       // 90°旋转
       rotateObject() {
+        //fabric的每个类型的对象都有自己的一套操作函数.
         this.selectedObj.rotate(this.selectedObj.angle === 360 ? 90 : this.selectedObj.angle + 90)
-        this.card.renderAll()
+        this.card.renderAll()  //renderAll()可看做是canvas组件的流形核纯函数的整合函数compose().
+                               //此函数的存在，说明fabric.js框架抽象层面还不够高；同时说明该框架不是响应式的；更接近于一套API库；
         this.saveState()
       },
       // 水平翻转

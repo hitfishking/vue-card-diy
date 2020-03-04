@@ -2,9 +2,9 @@ const app = {
   state: {
     htmlFontSize: null,
     cardType: 1,
-    frontCard: null,
+    frontCard: null,       //整个canvas应该被序列化为json或svg格式存储.
     behindCard: null,
-    selectedObj: null,
+    selectedObj: null,     //存储当前选择的对象.
     canvasState: null,
     undoList: [],
     redoList: [],

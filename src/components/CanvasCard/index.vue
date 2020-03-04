@@ -1,3 +1,5 @@
+//fabric的canvas对象，在vue中被封装为一个组件而已。
+
 <template>
   <canvas id="canvas"></canvas>
 </template>

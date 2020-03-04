@@ -1,5 +1,6 @@
 <template>
   <mu-container class="button-wrapper" style="padding: 5px 8px;text-align: center;">
+    <!--从组件和slot，从函数角度看，是：调用<mu-button>模板函数，而该函数又调用<mu-icon>函数.-->
     <mu-button fab small color="error" @click="clearAll">
       <mu-icon value="delete_sweep"></mu-icon>
     </mu-button>
