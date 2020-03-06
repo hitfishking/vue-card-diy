@@ -32,3 +32,6 @@ new Vue({
   components: {App},
   template: '<App/>'
 })
+
+//main.js中定义vue对象，可以认为，vue对象流形核的模板函数是index.html；
+//vue对象的$mount()方式进行渲染(不同于其他vue组件流形核的渲染函数)。

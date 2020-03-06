@@ -33,6 +33,10 @@
     mounted() {
       console.log('mounted card');
       // 会员卡尺寸 85.5*54毫米 (标准)
+      // 在CanvasCard组件mounted()时，建立fabric.Canvas对象；
+      // 所有的绘制内容，都在该Canvas对象中。
+      // fabric.Canvas('canvas'),将外部库的对象，与vue的<canvas>组件联系在一起了；
+      // 从此以后，就基本可以象操作vue组价一样操作使用fabric库。
       const card = this.self = new fabric.Canvas('canvas', {
         backgroundColor: 'white'
       })
@@ -49,7 +53,7 @@
       card.setHeight(this.cH)
 
       this.addCardEventListener(card)
-      this.initFrontCard(card)
+      this.initFrontCard(card)   //将canvas存储到store中.
       this.saveState()
     },
     beforeDestroy() {

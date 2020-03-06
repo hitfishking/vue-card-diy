@@ -42,7 +42,7 @@
     methods: {
       _closeListHandle(e) {
         e.stopPropagation()
-        if (!this.$el.contains(e.target)) {
+        if (!this.$el.contains(e.target)) {  //当前的this.$el就是<div class="footer">
           this.tabType = ''
         }
       },

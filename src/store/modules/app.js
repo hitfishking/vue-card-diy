@@ -2,10 +2,10 @@ const app = {
   state: {
     htmlFontSize: null,
     cardType: 1,
-    frontCard: null,       //整个canvas应该被序列化为json或svg格式存储.
+    frontCard: null,       //存储的是canvas对象；
     behindCard: null,
     selectedObj: null,     //存储当前选择的对象.
-    canvasState: null,
+    canvasState: null,     //状态以json格式存储.
     undoList: [],
     redoList: [],
     previewImg: null,
@@ -45,17 +45,17 @@ const app = {
       state.previewImg = img
     }
   },
-  actions: {
+  actions: {   //action自动提供一个store对象为参数；
     setHtmlFontSize({commit}, fontSize) {
       commit('SET_HTMLFONTSIZE', fontSize)
     },
-    initFrontCard({commit}, fCanvas) {
+    initFrontCard({commit}, fCanvas) {  //initFrontCard()存储canvas对象到state.frontCard字段中。
       commit('INIT_FRONTCARD', fCanvas)
     },
     initBehindCard({commit}, fCanvas) {
       commit('INIT_BEHINDCARD', fCanvas)
     },
-    setSelectedObj({commit}, object) {
+    setSelectedObj({commit}, object) {  //直接将fabric绘图对象存储在state.selectedObj字段中。
       commit('SET_SELECTEDOBJ', object)
     },
     setCanvasState({commit}, canvasState) {
@@ -81,13 +81,13 @@ const app = {
       commit('SET_REDOLIST', [])
 
       if (state.canvasState) {
-        commit('ADD_UNDO', state.canvasState)
+        commit('ADD_UNDO', state.canvasState)  //保存state之间，先将前一个state存到undo数组中。
       }
       console.log(state.frontCard.toJSON([
         'hasControls',
         'borderColor',
       ]))
-      commit('SET_CANVASSTATE', state.frontCard.toJSON([
+      commit('SET_CANVASSTATE', state.frontCard.toJSON([  //state以json格式存储.
         'hasControls',
         'borderColor',
         'scaleX',
@@ -107,7 +107,7 @@ const app = {
       commit('SET_CANVASSTATE', lastState)
       // this.popUndo()
       commit('POP_UNDO')
-      state.frontCard.loadFromJSON(lastState, () => {
+      state.frontCard.loadFromJSON(lastState, () => {  //frontCard恢复到前一个状态后，渲染。
         state.frontCard.renderAll()
       })
     },
